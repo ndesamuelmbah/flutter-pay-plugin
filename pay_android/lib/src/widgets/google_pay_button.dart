@@ -46,7 +46,7 @@ class RawGooglePayButton extends StatelessWidget {
       _GooglePayButtonTypeAsset.defaultAssetWidth;
 
   /// The default height for the Google Pay Button.
-  static const double defaultButtonHeight = 38;
+  static const double defaultButtonHeight = 38; //Customize button size.
 
   static const _defaultLocale = 'en';
   static const _supportedLocales = [
