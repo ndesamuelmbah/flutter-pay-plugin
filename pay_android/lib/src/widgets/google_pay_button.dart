@@ -11,7 +11,6 @@
 /// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 /// See the License for the specific language governing permissions and
 /// limitations under the License.
-
 part of '../../pay_android.dart';
 
 /// The types of button supported on Google Pay.
@@ -47,7 +46,7 @@ class RawGooglePayButton extends StatelessWidget {
       _GooglePayButtonTypeAsset.defaultAssetWidth;
 
   /// The default height for the Google Pay Button.
-  static const double defaultButtonHeight = 48;
+  static const double defaultButtonHeight = 38;
 
   static const _defaultLocale = 'en';
   static const _supportedLocales = [
@@ -87,14 +86,20 @@ class RawGooglePayButton extends StatelessWidget {
   /// Called when the button is pressed.
   final VoidCallback? onPressed;
 
-  /// The tyoe of button depending on the activity initiated with the payment
+  /// The type of button depending on the activity initiated with the payment
   /// transaction.
   final GooglePayButtonType type;
+  final Color borderColor;
+  final double borderWidth;
+  final double radius;
 
   /// Creates a Google Pay button widget with the parameters specified.
   const RawGooglePayButton({
     Key? key,
     this.onPressed,
+    this.borderWidth = 2,
+    this.radius = 4,
+    this.borderColor = Colors.transparent,
     this.type = GooglePayButtonType.pay,
   }) : super(key: key);
 
@@ -126,21 +131,34 @@ class RawGooglePayButton extends StatelessWidget {
       highlightElevation: 0,
       onPressed: onPressed,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(24),
-        side: const BorderSide(
-          color: Color(0xFF747775),
-          width: 1,
-        ),
-      ),
+          borderRadius: BorderRadius.circular(radius),
+          side: BorderSide(
+            color: borderColor,
+            width: borderWidth,
+          )),
       child: SvgPicture.asset(
         _assetPath(context),
         package: 'pay_android',
         semanticsLabel: 'Buy with Google Pay text',
-        height: 26,
+        height: 19,
       ),
     );
 
-    return SizedBox(
+    return Container(
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.15),
+          offset: const Offset(0, 1),
+          blurRadius: 3,
+          spreadRadius: 0,
+        ),
+        BoxShadow(
+          color: Colors.black.withOpacity(0.3),
+          offset: const Offset(0, 1),
+          blurRadius: 1,
+          spreadRadius: 0,
+        )
+      ]),
       height: defaultButtonHeight,
       child: rawButton,
     );
