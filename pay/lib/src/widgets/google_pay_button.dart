@@ -49,6 +49,7 @@ class GooglePayButton extends PayButton {
           loadingIndicator,
         ) {
     _googlePayButton = RawGooglePayButton(
+      paymentConfiguration: PaymentConfiguration.fromJsonString(paymentConfigurationAsset),
         type: type, onPressed: _defaultOnPressed(onPressed, paymentItems));
   }
 
